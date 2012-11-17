@@ -1,11 +1,11 @@
 #!/usr/bin/env bash
 #-----------------------------------------
 #
-# Script that toggles between Norwegian  &
-# English keymap.
+# A script for controlling the volume with
+# alsa.
 #
 #
-# Usage: `kbmap_toggle` toggles the keymap
+# Usage: `volumify up|down|toggle` 
 #
 #                           joescript 2011
 #                           Joachim Kruger
