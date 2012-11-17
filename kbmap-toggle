@@ -1,0 +1,30 @@
+#!/bin/bash
+#-----------------------------------------
+#
+# Script that toggles between Norwegian  &
+# English keymap.
+#
+#
+# Usage: `kbmap_toggle` toggles the keymap
+#
+#                           joescript 2011
+#                           Joachim Kruger
+#                           jk(a)redpai.no
+#
+#-----------------------------------------
+
+
+keymap=`setxkbmap -print | grep xkb_symbols | cut -d '+' -f 2`
+
+if [ "$keymap" = "no" ]; then
+    setxkbmap us
+    notify-send -t 2000 "Mapped keyboard to English"
+elif [ "$keymap" = "us" ]; then
+    setxkbmap no 
+    notify-send -t 2000 "Mapped keyboard to Norwegian"
+else
+    setxkbmap us
+    notify-send -t 2000 "Mapped keyboard to English"
+fi
+exit 0
+
