@@ -1,0 +1,50 @@
+#!/usr/bin/env python2
+
+""" Script for adjusting the keyboard brightness
+    of your Samsung Series 9 laptop.
+
+    Note that the script should work on most laptops,
+    just change `DIR` (and perhaps `FILE`) to 
+    match your system.
+
+    Since the `FILE` demands root priveleges to be
+    edited, add the following to your sudoers file:
+
+    `user hostname =NOPASSWD: /path/to/script/kbd_light`
+
+    Usage: `kbd_light up`   increase keyboard backlight
+           `kbd_light down` decrease keyboard backlight
+           Duh.
+
+                                      ~ joescript 2012 ~
+                                      ~ Joachim Kruger ~
+                                      ~ jk(a)redpai.no ~
+
+"""
+
+
+from sys import argv
+from os import system
+
+# Max value for keyboard brightness is found in 
+# /sys/class/leds/samsung::kbd_backlight/max_brightness
+MAX_VAL = 8
+DIR  = '/sys/class/leds/samsung::kbd_backlight/'
+FILE = 'brightness'
+PATH = DIR + FILE
+
+# arg is either `up` or `down`
+arg = argv[1]
+f = open(PATH, 'r+')
+val = new_val = int(f.readline())
+f.close()
+
+if arg == 'up' and val < MAX_VAL:
+    new_val += 1
+elif arg =='down' and val > 0:
+    new_val -= 1
+if new_val != val:
+    f = open(PATH,'w')
+    f.write(str(new_val))
+    f.close()
+
